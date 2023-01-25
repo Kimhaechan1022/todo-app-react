@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
+import ItemMain from './item/ItemMain';
 
 const Hello = () => {
 
@@ -12,9 +13,14 @@ const Hello = () => {
 //   $btn.onclick = e => {
 //     alert('박사님 안녕~~');
 //   };
+
+  const foo = () => {
+    console.log('foo!');
+  };
   
   // 이벤트 핸들러 함수 정의
   const sayHello = e => {
+    console.log('sayHello!');
     // alert('박사님 안녕~~');
     
     // 상태변수 값을 변경할때는 직접 대입하면 안되고 상태변경함수를 이용해야 함.
@@ -23,10 +29,21 @@ const Hello = () => {
 
   };
 
-  console.log("hello nick: " + nickName);
+  // 화면이 처음 렌더링(마운트) 될 때, 상태값이 변경될 때 호출
+  useEffect(() => {
+    console.log('2. useEffect call!!!');
+    console.log('3. nickName(useEffect): ' + nickName);
+  });
+  
+  console.log('1. nickName(component) : ' + nickName);
+
+  // 컴포넌트 내 실행코드 (1순위) - 화면이 그려지기도 전에 실행
+  // 렌더링시에 실행되는 코드 (2순위)
+  // useEffect에 있는 콜백 (3순위)
 
   return (
     <>
+      {foo()}
         <h1>Hello ~~~ {nickName} </h1>
         <button className="btn" onClick={sayHello}>척척박사</button>
         <button className="btn" onClick={() => { setNickName('척척석사'); }}>척척석사</button>
