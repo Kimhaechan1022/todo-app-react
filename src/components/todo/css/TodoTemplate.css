@@ -10,11 +10,24 @@
     box-shadow: 0 0 8px #aaa;
 
 
-    margin: 100px auto;
+    margin: 200px auto 100px;
 
     position: relative;
 
     display: flex;
     flex-direction: column;
 
+}
+
+.loading{
+    position:absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    
+}
+.loading .spinner-border{
+    height: 100px;
+    width: 100px;
+    --bs-spinner-border-width: 0.8rem
 }

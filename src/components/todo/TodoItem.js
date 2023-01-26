@@ -3,7 +3,7 @@ import { MdDone, MdDelete } from 'react-icons/md';
 import './css/TodoItem.css';
 import cn from 'classnames';
 
-const TodoItem = ({ todo, remove }) => {
+const TodoItem = ({ todo, remove, updateTodoStatus }) => {
 
   const {id, title, done} = todo;  
 
@@ -12,9 +12,20 @@ const TodoItem = ({ todo, remove }) => {
     remove(id);
   };
 
+  const doneCheckHandler = e => {
+
+    const modTodo = {
+      ...todo,
+      done:!done
+    };
+
+    updateTodoStatus(modTodo);
+  };
+
   return (
     <li className="todo-item">
-        <div className={cn('check-circle', {active: done})}>
+        <div className={cn('check-circle', {active: done})} 
+        onClick={doneCheckHandler}>
             {done && <MdDone />}
         </div>
         <span className={cn('text', {finish: done})}>{title}</span>
