@@ -6,10 +6,10 @@ const Item = ({ foodInfo }) => {
 //   console.log('props: ', props.foodInfo);
 //   console.log('foodInfo: ', foodInfo);
 
-  const { foodName, price, quantity } = foodInfo;
+  const { foodName:fn, price:p, quantity:q } = foodInfo;
 
   return (
-    <li key={foodName}>음식명: {foodName}, 가격: {price}, 수량: {quantity}</li>
+    <li>음식명: {fn}, 가격: {p}, 수량: {q}</li>
   )
 }
 

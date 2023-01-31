@@ -4,10 +4,10 @@ import FoodItem from './FoodItem'
 const FoodList = () => {
   return (
     <ul>
-        <FoodItem foodname = "짜짱면쓰" price = {1000}/>
-        <FoodItem foodname = "짬뿅" price = {2000}/>
-        <FoodItem foodname = "뽂음빱" price = {4000}/>
-        <FoodItem foodname = "땅쑤윢" price = {8000}/>
+        <FoodItem foodName={"짜장면"} price={6000} />
+        <FoodItem foodName="짬뽕" price={6500}/>
+        <FoodItem foodName="볶음밥" price={5500} />
+        <FoodItem foodName="탕수육" price={20000} />
     </ul>
   )
 }

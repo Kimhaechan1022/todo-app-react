@@ -8,20 +8,20 @@ const Join = () => {
 
     const API_BASE_URL = BASE_URL + USER;
 
-    
-
    // 검증 메시지 저장 
    const [message, setMessage] = useState({
       username: '',
       password: '',
-      email: ''
+      email: '',
+      passwordCheck: ''
    });  
 
    // 검증 완료 여부
    const [validate, setValidate] = useState({
       username: false,
       password: false,
-      email: false
+      email: false,
+      passwordCheck: false
    });
 
    // 입력값 저장
@@ -122,6 +122,14 @@ const Join = () => {
   // 비밀번호 입력란 검증 체인지 이벤트 핸들러
   const passwordHandler = e => {
 
+    // 패스워드 확인란을 비워버리기
+    document.getElementById('password-check').value = '';
+    document.getElementById('check-text').textContent = '';
+    setValidate({
+        ...validate,
+        passwordCheck: false
+    });
+    
     const pwRegex =  /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,20}$/;
 
     // 검증 시작
@@ -155,6 +163,38 @@ const Join = () => {
     });
   };
 
+  // 비밀번호확인 입력란 검증 체인지 이벤트 핸들러
+  const passwordCheckHandler = e => {
+
+    console.log('pwcheck event!');
+
+    // 검증 시작
+    let msg;
+    if (!e.target.value) { // 패스워드 안적은거
+        msg = '비밀번호 확인란은 필수값입니다!';
+        setValidate({
+            ...validate,
+            passwordCheck: false
+        });
+    } else if (userValue.password !== e.target.value) {
+        msg = '패스워드가 일치하지 않습니다.';
+        setValidate({
+            ...validate,
+            passwordCheck: false
+        });
+    } else {
+        msg = '패스워드가 일치합니다.';
+        setValidate({
+            ...validate,
+            passwordCheck: true
+        });
+    }
+    setMessage({
+        ...message,
+        passwordCheck: msg
+    });
+  };
+
   // validate객체 안의 모든 논리값이 true인지 검사하는 함수
   const isValid = () => {
     
@@ -162,6 +202,7 @@ const Join = () => {
     // 객체에서 key값만 뽑아줌 'username'
     for (let key in validate) {
         let value = validate[key];
+        console.log(key + ': ' +value);
         if (!value) return false;
     }
     return true;
@@ -186,6 +227,7 @@ const Join = () => {
             if (res.status === 200) {
                 alert('회원가입을 축하합니다.');
                 // 로그인페이지로 리다이렉트
+                window.location.href = '/login';
             } else {
                 alert('회원가입에 실패했습니다. 잠시 후 다시 시도하세요.');
             }
@@ -258,6 +300,27 @@ const Join = () => {
                         : {color: 'red'}
                     }>{message.password}</span>
                 </Grid>
+
+                <Grid item xs={12}>
+                    <TextField
+                        variant="outlined"
+                        required
+                        fullWidth
+                        name="password-check"
+                        label="패스워드 확인"
+                        type="password"
+                        id="password-check"
+                        autoComplete="check-password"
+                        onChange={passwordCheckHandler}
+                    
+                    />
+                    <span id="check-text" style={
+                        validate.passwordCheck
+                        ? {color: 'green'}
+                        : {color: 'red'}
+                    }>{message.passwordCheck}</span>
+                </Grid>
+
                 <Grid item xs={12}>
                     <Button type="submit" fullWidth variant="contained" style={{background: '#38d9a9'}}>
                         계정 생성

@@ -17,13 +17,12 @@
     padding: 12px;
     outline: none;
     box-sizing: border-box;
-    
 }
 
 .begin-btn {
     background: #38d9a9;
-    width: 60px;
-    height: 60px;
+    width: 80px;
+    height: 80px;
     border-radius: 50%;
     border: none;
     outline: none;
@@ -40,10 +39,8 @@
     z-index: 10;
 
     cursor: pointer;
-
     /* 애니메이션 지연효과 */
-    transition: 0.3s;
-
+    transition: 0.2s;
 }
 
 .begin-btn:hover {

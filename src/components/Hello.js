@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react'
-import ItemMain from './item/ItemMain';
 
 const Hello = () => {
 
@@ -30,10 +29,21 @@ const Hello = () => {
   };
 
   // 화면이 처음 렌더링(마운트) 될 때, 상태값이 변경될 때 호출
+  // 2번째 파라미터에 의존성 배열을 넣을 수 있음
+  // 빈배열 설정시 초기렌더링시에 단 1회만 호출
+  // 의존성 배열에 상태값을 넣으면 해당 값이 업데이트될 때 다시 호출
   useEffect(() => {
     console.log('2. useEffect call!!!');
     console.log('3. nickName(useEffect): ' + nickName);
-  });
+
+    // 정리함수
+    // 화면이 리렌더링되기 직전에 호출
+    return () => {
+      console.log('4. cleanup call!');
+      console.log('5. nickName(cleanup): ' + nickName);
+    };
+
+  }, [nickName]);
   
   console.log('1. nickName(component) : ' + nickName);
 

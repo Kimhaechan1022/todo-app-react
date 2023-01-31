@@ -1,10 +1,10 @@
-import React from "react";
+import React from 'react';
 
-const Greeting = ()=>{
+const Greeting = () => {
     return (
         <>
-            <h1> 메롱~ </h1>
-            <h2> 저는 react 초보입니둥</h2>
+            <h1>안녕안녕</h1>
+            <h2>저는 리액트 초보입니다.</h2>
         </>
     );
 };

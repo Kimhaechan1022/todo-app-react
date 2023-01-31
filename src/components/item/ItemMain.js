@@ -1,4 +1,5 @@
 import React from 'react'
+import Item from './Item';
 
 // 음식 메뉴 리스트
 const ItemMain = () => {
@@ -32,14 +33,11 @@ const ItemMain = () => {
 //     return tagArray;
 //   };
 
-  const makeLi = foodArray.map(food => {
-    const {foodName, price, quantity} = food;
-    return <li>음식명: {foodName}, 가격: {price}, 수량: {quantity}</li>;
-  });
+  const tagArray = foodArray.map(food => <Item key={food.foodName} foodInfo={food} abc="메롱" />);
 
   return (
     <ul>
-        {makeLi()}
+        {tagArray}
     </ul>
   )
 }

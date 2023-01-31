@@ -1,10 +1,13 @@
 import React from 'react'
 
-const FoodItem = ({foodname, price}) => {
-    console.log(foodname, price);
+// props : 부모 컴포넌트가 보내준 데이터가 담긴 객체
+const FoodItem = ({foodName, price}) => {
+
+//   console.log('props:', props);
+
   return (
     <li>
-        <a href="#">{foodname} ({price}원)</a>
+        <a href="#">{foodName} ({price}원)</a>
     </li>
   )
 }

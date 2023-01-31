@@ -1,17 +1,27 @@
 import React from 'react';
 import './css/TodoHeader.css';
 
-const TodoHeader = ({todoList}) => {
+const TodoHeader = ({ todoList }) => {
 
-  const undoList = todoList.filter(todo => !todo.done);
+  // todoList에서 done값이 false인 객체들만 필터링
+  const undoneTodos = todoList.filter(todo => !todo.done);
+
+  const today = new Date();
+  const dateString = today.toLocaleDateString('ko-KR', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric'
+  });
+  const dayName = today.toLocaleDateString('ko-KR', { weekday: 'long' });
 
   return (
     <header>
-        <h1>2023년 1월 15일</h1>
-        <h2 className='day'>수요일</h2>
-        <div className='tasks-left'>할 일 {undoList.length}개 남음</div>
+        <h1>{dateString}</h1>
+        <h2 className="day">{dayName}</h2>
+        <div className="tasks-left">할 일 {undoneTodos.length}개 남음</div>
     </header>
-  )
-}
+  );
 
-export default TodoHeader
+};
+
+export default TodoHeader;
