@@ -5,18 +5,22 @@ import TodoTemplate from './components/todo/TodoTemplate';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Join from './components/user/Join';
 import Login from './components/user/Login';
+import ProjectTemplate from './components/project/ProjectTemplate';
 
 function App() {
   return (
     <>
-      <Header />
+      {/* <Header /> */}
       {/* <TodoTemplate /> */}
 
       {/* <Join /> */}
+      <ProjectTemplate />
+      
 
-      <Login />
 
-      <Footer />
+      {/* <Login /> */}
+
+      {/* <Footer /> */}
     </>
   );
 }

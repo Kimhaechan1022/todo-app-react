@@ -32,7 +32,7 @@ const Header = () => {
                             {isLogin() 
                                 ? `${getUsername()}님` 
                                 : '오늘'}
-                                의 할일
+                                의 프로젝트
                         </Typography>   
                     </div>
                 </Grid>
