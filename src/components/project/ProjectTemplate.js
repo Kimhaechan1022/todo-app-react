@@ -76,14 +76,16 @@ const ProjectTemplate = () => {
     };
 
   const addProject = (project) => {
-
+    console.log(project);
     fetch(API_BASE_URL, {
         method: 'POST',
         headers: headerInfo,
         body: JSON.stringify(project)
     })
     .then(res => res.json())
+
     .then(result => {
+        console.log(result);
         setProjects(result.list);
     });
   };
@@ -98,7 +100,7 @@ const ProjectTemplate = () => {
             />
         </div>
         <div>
-            <ProjectInput add={addProject} selectAllUser={selectAllUser} userList = {users}/> 
+            <ProjectInput add={addProject} selectAllUser={selectAllUser} userLists = {users}/> 
         </div>
     </>
   );

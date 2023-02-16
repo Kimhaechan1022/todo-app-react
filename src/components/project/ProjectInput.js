@@ -4,7 +4,7 @@ import cn from 'classnames';
 import './css/ProjectInput.css';
 import Select from "react-select";
 
-const ProjectInput = ({ add , selectAllUser, userList}) => {
+const ProjectInput = ({ add , selectAllUser, userLists}) => {
 
 
     
@@ -18,16 +18,17 @@ const ProjectInput = ({ add , selectAllUser, userList}) => {
 
   // 입력폼에 입력한 데이터들을 담을 상태변수
   const [project, setProject] = useState({
-    title: '',
-    contents: '',
-    // members : null
+    projectTitle: '',
+    projectContent: '',
+    userList : null
   });
 
-  const {title, contents, members} = project;  //members
+  const {projectTitle, projectContent} = project;
 
   const onChange = (e) => {
-    
-    console.log(e.target);
+    // console.log("onchange");
+    // console.log(e);
+    // console.log(e.name);
     const { value, name } = e.target;
     setProject({
       ...project,
@@ -42,13 +43,12 @@ const ProjectInput = ({ add , selectAllUser, userList}) => {
     if(open===false){
         selectAllUser();
         const item = [];
-        for(var key in userList){
-            item.push({label: userList[key]['userName'] 
-            + ' (email' +userList[key]['email'] +')'
-            ,  value: userList[key]});
+        for(var key in userLists){
+            item.push({label: userLists[key]['userName'] 
+            + ' (email' +userLists[key]['email'] +')'
+            ,  value: userLists[key]});
         }
         setUser(item);
-        console.log(user);
   
     }
 
@@ -60,17 +60,29 @@ const ProjectInput = ({ add , selectAllUser, userList}) => {
     if (true) {
 
         // 입력데이터들을 읽기
-        console.log(project);
+       
+        console.log(selectUser);
 
-        // // 서버 요청 보내기
-        // add(project);
+        const resultValueList = []
+        for (var key in selectUser){
+            resultValueList.push(selectUser[key].value);
+        }
+        
+        const project2 = {
+            ...project,
+            userList : resultValueList
+          };
+        
+        
+        // 서버 요청 보내기
+        add(project2);
 
-        // // 입력끝나면 입력칸 비우기
-        // setProject({
-        //     ...project,
-        //     title: '',
-        //     contents: '',
-        // });
+        // 입력끝나면 입력칸 비우기
+        setProject({
+            ...project,
+            projectTitle: '',
+            projectContent: ''
+        });
     }
   };
 
@@ -83,34 +95,34 @@ const ProjectInput = ({ add , selectAllUser, userList}) => {
             <div className="project-input">
                 <form className="project-form" onSubmit={stopSubmit}>
                     <input 
-                        id = "title"
-                        name = "title"
+                        id = "projectTitle"
+                        name = "projectTitle"
                         type="text"
                         placeholder="제목 입력하기"
                         autoFocus
                         onChange={onChange}
-                        value={title}
+                        value={projectTitle}
                         required
                     />
                     <input 
-                        id = "contents"
-                        name = "contents"
+                        id = "projectContent"
+                        name = "projectContent"
                         type="text"
                         placeholder="내용 입력하기"
                         autoFocus
                         onChange={onChange}
-                        value={contents}
+                        value={projectContent}
                         required
                     />
                     <Select
                         id = "members"
                         name = "members"
-                        // type="Select"
                         options={user}
                         isMulti
-                        onChange={setSelectUser}
+                        onChange={(event)=>{
+                            setSelectUser(event);
+                        }}
                         autoFocus
-                        value={members}
                     />
                     <button onClick = {projectAddHandler}>제출</button>
                 </form>
